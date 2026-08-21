@@ -8,6 +8,7 @@ import TESTIMONIALS from "../components/Testimonials";
 import DRESS_STYLES from "../components/BrowsDressStyles";
 import Hero from "../components/Hero";
 import BrowseStyles from "../components/BrowsDressStyles";
+import Customer from "../components/Customer";
 
 <DRESS_STYLES/>
 ,
@@ -76,18 +77,7 @@ export default function Home() {
 
 < BrowseStyles/>
 
-      <section className="section">
-        <h2 className="section__title">OUR HAPPY CUSTOMERS</h2>
-        <div className="testimonials">
-          {TESTIMONIALS.map((t) => (
-            <div key={t.name} className="testimonial-card">
-              <StarRating rating={t.rating} />
-              <p className="testimonial-card__name">{t.name}</p>
-              <p className="testimonial-card__text">&ldquo;{t.text}&rdquo;</p>
-            </div>
-          ))}
-        </div>
-      </section>
+<Customer/>
 
       <Newsletter />
     </>
