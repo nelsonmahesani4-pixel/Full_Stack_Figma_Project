@@ -7,13 +7,11 @@ export default function Header() {
   const [search, setSearch] = useState("");
   const { cart } = useCart();
   const navigate = useNavigate();
-
   const handleSearch = (e) => {
     e.preventDefault();
     navigate(`/category?search=${encodeURIComponent(search)}`);
     setMenuOpen(false);
   };
-
   return (
     <header className="site-header">
       <div className="promo-bar">
@@ -32,7 +30,6 @@ export default function Header() {
           <span />
           <span />
         </button>
-
         <Link to="/" className="logo">
           SHOP.CO
         </Link>
@@ -47,7 +44,7 @@ export default function Header() {
           <Link to="/category" onClick={() => setMenuOpen(false)}>
             New Arrivals
           </Link>
-          <Link to="/category" onClick={() => setMenuOpen(false)}>
+          <Link to="/category" onClick={() => setMenuOpen(true)}>
             Brands
           </Link>
 

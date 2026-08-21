@@ -16,8 +16,6 @@ app.use("/api/products", productsRouter);
 app.use("/api/cart", cartRouter);
 
 app.use((req, res) => res.status(404).json({ error: "Not found" }));
-
-// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).json({ error: "Internal server error" });

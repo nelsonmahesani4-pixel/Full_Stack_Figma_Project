@@ -4,19 +4,14 @@ import { api } from "../api/api";
 import ProductCard from "../components/ProductCard";
 import Newsletter from "../components/Newsletter";
 import StarRating from "../components/StarRating";
+import TESTIMONIALS from "../components/Testimonials";
+import DRESS_STYLES from "../components/BrowsDressStyles";
+import Hero from "../components/Hero";
+import BrowseStyles from "../components/BrowsDressStyles";
 
-const DRESS_STYLES = [
-  { name: "Casual", size: "large" },
-  { name: "Formal", size: "small" },
-  { name: "Party", size: "small" },
-  { name: "Gym", size: "large" },
-];
-
-const TESTIMONIALS = [
-  { name: "Sarah M.", rating: 5, text: "The quality exceeded my expectations. Fits exactly as described and the fabric feels great." },
-  { name: "Alex K.", rating: 5, text: "Fast shipping and the checkered shirt is even better in person. Definitely ordering again." },
-  { name: "Priya R.", rating: 4.5, text: "Great range of sizes and the site made it easy to find exactly what I was looking for." },
-];
+<DRESS_STYLES/>
+,
+<TESTIMONIALS/>
 
 export default function Home() {
   const [newArrivals, setNewArrivals] = useState([]);
@@ -49,40 +44,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="hero">
-        <div className="hero__inner">
-          <div className="hero__copy">
-            <h1>FIND CLOTHES THAT MATCHES YOUR STYLE</h1>
-            <p>
-              Browse through our diverse range of meticulously crafted garments, designed to
-              bring out your individuality and cater to your sense of style.
-            </p>
-            <Link to="/category" className="btn btn--dark">
-              Shop Now
-            </Link>
-            <div className="hero__stats">
-              <div>
-                <strong>200+</strong>
-                <span>International Brands</span>
-              </div>
-              <div>
-                <strong>2,000+</strong>
-                <span>High-Quality Products</span>
-              </div>
-              <div>
-                <strong>30,000+</strong>
-                <span>Happy Customers</span>
-              </div>
-            </div>
-          </div>
-          <div className="hero__art" aria-hidden="true" />
-        </div>
-        <div className="hero__brands">
-          {["VERSACE", "ZARA", "GUCCI", "PRADA", "Calvin Klein"].map((b) => (
-            <span key={b}>{b}</span>
-          ))}
-        </div>
-      </section>
+    <Hero/>
 
       <section className="section">
         <h2 className="section__title">NEW ARRIVALS</h2>
@@ -112,22 +74,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section dress-style">
-        <div className="dress-style__panel">
-          <h2 className="section__title">BROWSE BY DRESS STYLE</h2>
-          <div className="dress-style__grid">
-            {DRESS_STYLES.map((style) => (
-              <Link
-                key={style.name}
-                to={`/category?dressStyle=${style.name}`}
-                className={`dress-style__card dress-style__card--${style.size}`}
-              >
-                {style.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+< BrowseStyles/>
 
       <section className="section">
         <h2 className="section__title">OUR HAPPY CUSTOMERS</h2>

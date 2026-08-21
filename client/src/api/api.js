@@ -1,16 +1,18 @@
-
 const BASE_URL = import.meta.env.VITE_API_URL || "/api";
+
 function getCartId() {
-  let id = localStorage.getItem("shopco-cart-id");
+  let id = localStorage.getItem("cart-id");
+
   if (!id) {
     id = crypto.randomUUID();
-    localStorage.setItem("shopco-cart-id", id);
+    localStorage.setItem("cart-id", id);
   }
+
   return id;
 }
 
-async function request(path, options = {}) {
-  const res = await fetch(`${BASE_URL}${path}`, {
+async function request(url, options = {}) {
+  const response = await fetch(BASE_URL + url, {
     ...options,
     headers: {
       "Content-Type": "application/json",
@@ -18,28 +20,43 @@ async function request(path, options = {}) {
       ...options.headers,
     },
   });
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new Error(body.error || `Request failed: ${res.status}`);
+
+  if (!response.ok) {
+    throw new Error("Something went wrong");
   }
-  return res.json();
+
+  return response.json();
 }
 
 export const api = {
   getProducts: (params = {}) => {
-    const query = new URLSearchParams(
-      Object.fromEntries(Object.entries(params).filter(([, v]) => v !== undefined && v !== ""))
-    ).toString();
+    const query = new URLSearchParams(params).toString();
+
     return request(`/products${query ? `?${query}` : ""}`);
   },
-  getProduct: (id) => request(`/products/${id}`),
-  getRelated: (id) => request(`/products/${id}/related`),
-  getFilters: () => request(`/products/meta/categories`),
 
-  getCart: () => request(`/cart`),
-  addToCart: (line) => request(`/cart`, { method: "POST", body: JSON.stringify(line) }),
-  updateCartLine: (productId, line) =>
-    request(`/cart/${productId}`, { method: "PATCH", body: JSON.stringify(line) }),
-  removeCartLine: (productId, line) =>
-    request(`/cart/${productId}`, { method: "DELETE", body: JSON.stringify(line) }),
+  getProduct: (id) => request(`/products/${id}`),
+
+  getRelated: (id) => request(`/products/${id}/related`),
+
+  getFilters: () => request("/products/meta/categories"),
+
+  getCart: () => request("/cart"),
+
+  addToCart: (product) =>
+    request("/cart", {
+      method: "POST",
+      body: JSON.stringify(product),
+    }),
+
+  updateCartLine: (id, data) =>
+    request(`/cart/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    }),
+
+  removeCartLine: (id) =>
+    request(`/cart/${id}`, {
+      method: "DELETE",
+    }),
 };
