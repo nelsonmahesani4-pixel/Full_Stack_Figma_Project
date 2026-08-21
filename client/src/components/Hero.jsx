@@ -35,8 +35,6 @@ export default function Hero() {
             </div>
           </div>
         </div>
-
-        <div className="hero__art" aria-hidden="true" />
       </div>
 
       <BrandMarquee />
