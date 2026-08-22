@@ -6,7 +6,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       "/api": {
-        target: "https://backendfigmaweb-production.up.railway.app/",
+        target: "http://localhost:5000",
         changeOrigin: true,
       },
     },
