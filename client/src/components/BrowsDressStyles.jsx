@@ -2,20 +2,25 @@ import { Link } from "react-router-dom";
 
 const DRESS_STYLES = [
   {
-    name: "Casual",
+    name:"casual",
     size: "large",
+    image:"/Images/casual.png"
   },
   {
     name: "Formal",
     size: "small",
+    image: "/Images/formal1.png",
   },
   {
     name: "Party",
     size: "small",
+    image: "/Images/party.png",
   },
   {
-    name: "Gym",
+    // name: "Gym",
     size: "large",
+    image:"/Images/gym.png"
+    
   },
 ];
 
@@ -28,12 +33,13 @@ export default function BrowseStyles() {
         <div className="dress-style__grid">
           {DRESS_STYLES.map((style) => (
             <Link
-              key={style.name}
-              to={`/category?dressStyle=${style.name}`}
-              className={`dress-style__card dress-style__card--${style.size}`}
-            >
-              {style.name}
-            </Link>
+  key={style.name}
+  to={`/category?dressStyle=${style.name}`}
+  className={`dress-style__card dress-style__card--${style.size}`}
+>
+  <img src={style.image} alt={style.name} />
+  <span>{style.name}</span>
+</Link>
           ))}
         </div>
       </div>
