@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import BrandMarquee from "./BrandMarquee";
+import "./Hero.css";
 
 export default function Hero() {
   return (
@@ -34,6 +35,10 @@ export default function Hero() {
               <span>Happy Customers</span>
             </div>
           </div>
+        </div>
+
+        <div className="hero__image">
+          <img src="/Images/Hero-Img.jpg" alt="Fashion models" />
         </div>
       </div>
 
