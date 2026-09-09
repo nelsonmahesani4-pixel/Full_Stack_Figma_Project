@@ -1,26 +1,29 @@
 require("dotenv").config();
 
 const mongoose = require("mongoose");
-
-const connectDB = require("./config/db");
 const Product = require("./models/Product");
 const { products } = require("./data/products");
 
 async function seedProducts() {
   try {
-    await connectDB();
+    await mongoose.connect(process.env.MONGO_URI);
 
-    // Purane products delete karke fresh data import karega
+    console.log("MongoDB connected");
+
     await Product.deleteMany({});
 
     await Product.insertMany(products);
 
-    console.log(`${products.length} products imported successfully`);
+    console.log(`${products.length} products inserted successfully`);
 
-    await mongoose.connection.close();
+    await mongoose.disconnect();
+
+    console.log("MongoDB disconnected");
     process.exit(0);
   } catch (error) {
-    console.error("Error importing products:", error.message);
+    console.error("Seed failed:", error.message);
+
+    await mongoose.disconnect();
     process.exit(1);
   }
 }

@@ -5,6 +5,8 @@ const cors = require("cors");
 const productsRouter = require("./routes/products");
 const cartRouter = require("./routes/cart");
 const authRouter = require("./routes/Auth");
+const usersRouter = require("./routes/users");
+const ordersRouter = require("./routes/orders");
 
 const connectDB = require("./config/db");
 
@@ -53,7 +55,32 @@ app.use("/api/auth", async (req, res, next) => {
     next(error);
   }
 }, authRouter);
-
+// user routes
+app.use(
+  "/api/users",
+  async (req, res, next) => {
+    try {
+      await connectDB();
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
+  usersRouter
+);
+// order routes
+app.use(
+  "/api/orders",
+  async (req, res, next) => {
+    try {
+      await connectDB();
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
+  ordersRouter
+);
 app.use((req, res) => {
   res.status(404).json({ error: "Not found" });
 });
@@ -66,5 +93,8 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.listen(process.env.PORT || 8000, () => {
+  console.log(`Server running on port ${process.env.PORT || 8000}`);
+});
 module.exports = app;
  

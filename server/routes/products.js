@@ -13,10 +13,10 @@ function finalPrice(product) {
 }
 
 
-// ======================================================
+// 
 // GET /api/products
 // Public: sab users products dekh sakte hain
-// ======================================================
+// 
 router.get("/", async (req, res) => {
   try {
     const {
@@ -117,9 +117,7 @@ router.get("/", async (req, res) => {
 });
 
 
-// ======================================================
 // GET /api/products/meta/categories
-// ======================================================
 router.get("/meta/categories", async (req, res) => {
   try {
     const categories = await Product.distinct("category");
@@ -139,10 +137,7 @@ router.get("/meta/categories", async (req, res) => {
 });
 
 
-// ======================================================
 // GET /api/products/:id/related
-// IMPORTANT: /related route before /:id
-// ======================================================
 router.get("/:id/related", async (req, res) => {
   try {
     const product = await Product.findOne({
@@ -182,10 +177,7 @@ router.get("/:id/related", async (req, res) => {
 });
 
 
-// ======================================================
-// GET /api/products/:id
-// Public: single product
-// ======================================================
+// GET /api/products/:id/   single product
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findOne({
