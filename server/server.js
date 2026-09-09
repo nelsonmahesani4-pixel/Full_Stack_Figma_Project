@@ -3,11 +3,11 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-const productsRouter = require("./routes/products");
-const cartRouter = require("./routes/cart");
-const authRouter = require("./routes/Auth");
-const usersRouter = require("./routes/users");
-const ordersRouter = require("./routes/orders");
+const productsRouter = require("./routes/products.js");
+const cartRouter = require("./routes/cart.js");
+const authRouter = require("./routes/Auth.js");
+const usersRouter = require("./routes/users.js");
+const ordersRouter = require("./routes/orders.js");
 
 const connectDB = require("./config/db");
 
