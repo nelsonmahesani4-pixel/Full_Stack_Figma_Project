@@ -2,8 +2,8 @@
 const express = require("express");
 const router = express.Router();
 
-const Product = require("../models/Product.js");
-const protect = require("../middleware/auth.js");
+const Product = require("../models/product.js");
+const protect = require("../middleware/Auth.js");
 
 // Calculate final price
 function finalPrice(product) {
@@ -11,7 +11,6 @@ function finalPrice(product) {
     ? Math.round(product.price * (1 - product.discount / 100))
     : product.price;
 }
-
 
 // 
 // GET /api/products
