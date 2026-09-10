@@ -36,13 +36,9 @@ export const api = {
   },
 
   getProduct: (id) => request(`/products/${id}`),
-
   getRelated: (id) => request(`/products/${id}/related`),
-
   getFilters: () => request("/products/meta/categories"),
-
   getCart: () => request("/cart"),
-
   addToCart: (product) =>
     request("/cart", {
       method: "POST",

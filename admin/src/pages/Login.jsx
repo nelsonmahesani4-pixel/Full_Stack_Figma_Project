@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -54,19 +53,19 @@ export default function Login() {
         );
       }
 
-      // REGISTER
+      // REGISTER SUCCESS
       if (isRegister) {
-        setSuccess("Account created successfully! You can now login.");
+        setSuccess("Account created successfully! Please login.");
 
         setName("");
         setEmail("");
         setPassword("");
 
-        // Switch back to login
+        // Switch to Login
         setIsRegister(false);
       }
 
-      // LOGIN
+      // LOGIN SUCCESS
       else {
         const token = data.token || data.accessToken;
 
@@ -87,8 +86,10 @@ export default function Login() {
 
   const switchMode = () => {
     setIsRegister(!isRegister);
+
     setError("");
     setSuccess("");
+
     setName("");
     setEmail("");
     setPassword("");
@@ -179,7 +180,7 @@ export default function Login() {
             />
           </div>
 
-          {/* Submit */}
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
@@ -215,34 +216,4 @@ export default function Login() {
       </div>
     </div>
   );
-}
-
-
-// ### Ab kaise work karega?
-
-// **New user:**
-
-// `Create an account` → Name + Email + Password → `Create Account` → MongoDB mein account create → Login screen.
-
-// **Existing user:**
-
-// Email + Password → `Login` → JWT token → Dashboard `/`.
-
-// ### Ek important check
-
-// Aapke `.env` mein agar:
-
-// ```env
-// VITE_API_URL=http://localhost:8000/api
-// ```
-
-// hai, to ye automatically:
-
-// ```text
-// POST http://localhost:8000/api/auth/register
-// POST http://localhost:8000/api/auth/login
-// ```
-
-// ko call karega.
-
-// Aur deployed frontend ke liye `VITE_API_URL` mein **aapke deployed backend ka `/api` URL** hona chahiye.
+}``
