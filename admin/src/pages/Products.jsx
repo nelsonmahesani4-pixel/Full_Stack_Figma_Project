@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:8000/api/products";
+const API_URL = `${import.meta.env.VITE_API_URL}/products`;
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -23,12 +23,7 @@ export default function Products() {
     description: "",
     images: "",
   });
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  // =========================
+// =========================
   // GET PRODUCTS
   // =========================
   const fetchProducts = async () => {
@@ -52,6 +47,15 @@ export default function Products() {
     }
   };
 
+useEffect(() => {
+  const loadProducts = async () => {
+    await fetchProducts();
+  };
+
+  loadProducts();
+}, []);
+
+  
   // =========================
   // GET TOKEN
   // =========================

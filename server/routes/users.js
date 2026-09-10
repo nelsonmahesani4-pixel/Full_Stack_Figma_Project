@@ -51,7 +51,15 @@ router.get("/:id", protect, async (req, res) => {
 // DELETE /api/users/:id
 router.delete("/:id", protect, async (req, res) => {
   try {
-    const user = await User.findByIdAndDelete(req.params.id);
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        error: "Invalid user ID",
+      });
+    }
+
+    const user = await User.findByIdAndDelete(id);
 
     if (!user) {
       return res.status(404).json({
@@ -63,7 +71,7 @@ router.delete("/:id", protect, async (req, res) => {
       message: "User deleted successfully",
     });
   } catch (error) {
-    console.error(error);
+    console.error("Delete user error:", error);
 
     res.status(500).json({
       error: "Failed to delete user",

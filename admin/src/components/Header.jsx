@@ -1,45 +1,79 @@
-import { useNavigate } from "react-router-dom";
+import {
+  Search,
+  SlidersHorizontal,
+  Radio,
+  Languages,
+  Bell,
+  Maximize,
+  Settings,
+  Menu,
+} from "lucide-react";
 
 export default function Header({ onMenuClick }) {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    navigate("/login");
-  };
-
   return (
-    <header className="h-16 bg-white border-b flex items-center justify-between px-4 md:px-6 sticky top-0 z-30">
-      <div className="flex items-center gap-4">
+    <header className="flex h-[86px] items-center justify-between border-b border-gray-200 bg-white px-4 md:px-8">
+
+      {/* MOBILE MENU + SEARCH */}
+      <div className="flex items-center gap-3">
+
         <button
           onClick={onMenuClick}
-          className="lg:hidden p-2 rounded-lg hover:bg-gray-100"
+          className="rounded-lg p-2 text-gray-600 hover:bg-gray-100 lg:hidden"
         >
-          ☰
+          <Menu size={24} />
         </button>
 
-        <h2 className="text-xl font-bold text-gray-800">
-          Admin Panel
-        </h2>
-      </div>
+        <div className="flex h-11 w-[280px] items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4">
+          <Search size={20} className="text-gray-500" />
 
-      <div className="flex items-center gap-4">
-        <div className="hidden sm:block text-right">
-          <p className="text-sm font-semibold text-gray-800">
-            Admin
-          </p>
-          <p className="text-xs text-gray-500">
-            Administrator
-          </p>
+          <input
+            type="text"
+            placeholder="Search"
+            className="w-full bg-transparent text-sm outline-none placeholder:text-gray-400"
+          />
+
+          <SlidersHorizontal
+            size={20}
+            className="text-purple-600"
+          />
         </div>
 
-        <button
-          onClick={handleLogout}
-          className="px-4 py-2 bg-black text-white rounded-lg text-sm hover:bg-gray-800 transition"
-        >
-          Logout
-        </button>
       </div>
+
+      {/* RIGHT ICONS */}
+      <div className="flex items-center gap-3">
+
+        <button className="hidden rounded-lg bg-purple-100 p-3 text-purple-600 sm:block">
+          <Radio size={19} />
+        </button>
+
+        <button className="hidden rounded-lg bg-blue-100 p-3 text-blue-600 sm:block">
+          <Languages size={19} />
+        </button>
+
+        <button className="rounded-lg bg-yellow-100 p-3 text-yellow-600">
+          <Bell size={19} />
+        </button>
+
+        <button className="hidden rounded-lg bg-blue-100 p-3 text-blue-600 sm:block">
+          <Maximize size={19} />
+        </button>
+
+        {/* PROFILE */}
+        <div className="flex items-center gap-3 rounded-full bg-blue-50 px-2 py-2">
+
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-600 text-sm font-bold text-white">
+            A
+          </div>
+
+          <button className="hidden text-blue-600 sm:block">
+            <Settings size={20} />
+          </button>
+
+        </div>
+
+      </div>
+
     </header>
   );
 }
